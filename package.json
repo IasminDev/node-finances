@@ -4,16 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch --env-file .env src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.12.8",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.14.2",
+    "prisma": "^5.15.0",
+    "tsx": "^4.15.1",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "fastify": "^4.26.2"
+    "@fastify/cookie": "^9.3.1",
+    "@fastify/jwt": "^8.0.1",
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^3.1.0",
+    "@prisma/client": "^5.15.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.27.0",
+    "fastify-swagger": "^5.2.0",
+    "fastify-type-provider-zod": "^1.2.0",
+    "zod": "^3.23.8"
   }
 }
