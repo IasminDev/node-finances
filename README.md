@@ -40,3 +40,4 @@ npm i bcrypt
 npm i @types/bcrypt -D
 npm i @fastify/jwt @fastify/cookie
 npm i dotenv
+npm i tsup -D

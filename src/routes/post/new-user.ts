@@ -23,6 +23,9 @@ export async function newUser(app: FastifyInstance) {
           201: z.object({
             userId: z.string().uuid(),
           }),
+          204: z.object({
+            message: z.string(),
+          }),
           401: z.object({
             message: z.string(),
           }),

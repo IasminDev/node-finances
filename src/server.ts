@@ -29,9 +29,16 @@ import { delUser } from "./routes/delete/del-user";
 import { delDebt } from "./routes/delete/del-debt";
 import { delGoal } from "./routes/delete/del-goal";
 import { delRevenue } from "./routes/delete/del-revenue";
+import fastifyCors from "@fastify/cors";
 require("dotenv").config();
 
 const app = fastify({ logger: true });
+app.register(fastifyCors, {
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
+})
+
 const SECRET = process.env.JWT_SECRET;
 
 // Register the Zod compiler
@@ -86,6 +93,7 @@ app.register(delUser);
 app.register(delRevenue);
 app.register(delGoal);
 app.register(delDebt);
+
 
 app.listen({ port: 3333 }).then(() => {
   console.log("HTTP server running on http://localhost:3333");
