@@ -32,8 +32,7 @@ export async function allDebts(app: FastifyInstance) {
     async (request, reply) => {
       const { userId } = request.params;
 
-      const debts = await Promise.all([
-        prisma.debt.findMany({
+      const debts = await prisma.debt.findMany({
           select: {
             id: true,
             description: true,
@@ -44,8 +43,7 @@ export async function allDebts(app: FastifyInstance) {
           where: {
             userId,
           },
-        }),
-      ]);
+        })
       return reply.send({
         debts: debts.map((debt) => {
           return {

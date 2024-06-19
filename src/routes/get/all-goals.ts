@@ -31,8 +31,7 @@ export async function allGoals(app: FastifyInstance) {
     async (request, reply) => {
       const { userId } = request.params;
 
-      const goals = await Promise.all([
-        prisma.goal.findMany({
+      const goals = await prisma.goal.findMany({
           select: {
             id: true,
             description: true,
@@ -42,8 +41,7 @@ export async function allGoals(app: FastifyInstance) {
           where: {
             userId,
           },
-        }),
-      ]);
+        })
       return reply.send({
         goals: goals.map((goal) => {
           return {

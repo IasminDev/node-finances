@@ -36,7 +36,7 @@ const app = fastify({ logger: true });
 app.register(fastifyCors, {
   origin: 'http://localhost:5173',
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'token'],
 })
 
 const SECRET = process.env.JWT_SECRET;
