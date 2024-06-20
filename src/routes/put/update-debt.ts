@@ -12,7 +12,7 @@ export async function updateDebt(app: FastifyInstance) {
         tags: ["debts"],
         params: z.object({
           userId: z.string().uuid(),
-          debtId: z.number().int(),
+          debtId: z.string(),
         }),
         headers: z.object({
           token: z.string(),
@@ -47,17 +47,17 @@ export async function updateDebt(app: FastifyInstance) {
 
       const debt = await prisma.debt.findUnique({
         where: {
-          id: debtId,
+          id:parseInt(debtId) ,
           userId: userId,
         },
       });
       if (debt === null) {
-        return reply.status(400).send({ message: "debt not found" });
+        return reply.status(400).send({ message: "Debt not found" });
       }
 
       const updateDebt = await prisma.debt.update({
         where: {
-          id: debtId,
+          id:parseInt(debtId),
           userId: userId,
         },
         data: {

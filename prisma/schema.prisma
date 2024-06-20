@@ -32,7 +32,7 @@ model Goal {
   date        DateTime
   userId      String   @map("user_id")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("goals")
 }
@@ -45,7 +45,7 @@ model Debt {
   date        DateTime
   userId      String   @map("user_id")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("debts")
 }
@@ -58,7 +58,7 @@ model Saving {
   date        DateTime
   userId      String   @map("user_id")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("savings")
 }
