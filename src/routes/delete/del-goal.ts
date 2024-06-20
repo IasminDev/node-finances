@@ -12,7 +12,7 @@ export async function delGoal(app: FastifyInstance) {
         tags: ["goals"],
         params: z.object({
           userId: z.string().uuid(),
-          goalId: z.number().int(),
+          goalId: z.string(),
         }),
         headers: z.object({
           token: z.string(),
@@ -33,7 +33,7 @@ export async function delGoal(app: FastifyInstance) {
       const goal = await prisma.goal.findUnique({
         where: {
           userId: userId,
-          id: goalId,
+          id:parseInt(goalId),
         },
       });
       if (goal === null) {
@@ -41,7 +41,7 @@ export async function delGoal(app: FastifyInstance) {
       }
       await prisma.goal.delete({
         where: {
-          id: goalId,
+          id:parseInt(goalId),
         },
       });
       reply.code(204).send({ message: "Goal deleted successfully" });

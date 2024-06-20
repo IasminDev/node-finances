@@ -25,7 +25,7 @@ export async function newGoal(app: FastifyInstance) {
           201: z.object({
             message: z.string(),
           }),
-          401: z.object({
+          400: z.object({
             message: z.string(),
           }),
           500: z.object({
@@ -38,6 +38,7 @@ export async function newGoal(app: FastifyInstance) {
       const { userId } = request.params;
       const { description, value, date } = request.body;
 
+    try { 
       const goal = await prisma.goal.create({
         data: {
           description,
@@ -46,10 +47,13 @@ export async function newGoal(app: FastifyInstance) {
           userId,
         },
       });
-
-      return reply.status(201).send({ message: "Goal add successfully" });
-      return reply.status(401).send({ message: "Invalid" });
+      if (!description || !value || !date || !userId) {
+        return reply.status(400).send({ message: "Something invalid" });
+      }
+      return reply.status(201).send({ message: "Revenue add successfully" });
+    } catch {
       return reply.status(500).send({ message: "Internal Server Error" });
     }
-  );
+  }
+);
 }

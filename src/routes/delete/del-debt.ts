@@ -12,7 +12,7 @@ export async function delDebt(app: FastifyInstance) {
         tags: ["debts"],
         params: z.object({
           userId: z.string().uuid(),
-          debtId: z.number().int(),
+          debtId: z.string(),
         }),
         headers: z.object({
           token: z.string(),
@@ -33,7 +33,7 @@ export async function delDebt(app: FastifyInstance) {
       const debt = await prisma.debt.findUnique({
         where: {
           userId: userId,
-          id: debtId,
+          id: parseInt(debtId),
         },
       });
       if (debt === null) {
@@ -41,7 +41,7 @@ export async function delDebt(app: FastifyInstance) {
       }
       await prisma.debt.delete({
         where: {
-          id: debtId,
+          id: parseInt(debtId),
         },
       });
       reply.code(204).send({ message: "Debt deleted successfully" });

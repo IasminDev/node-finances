@@ -12,7 +12,7 @@ export async function updateGoal(app: FastifyInstance) {
         tags: ["goals"],
         params: z.object({
           userId: z.string().uuid(),
-          goalId: z.number().int(),
+          goalId: z.string(),
         }),
         headers: z.object({
           token: z.string(),
@@ -45,7 +45,7 @@ export async function updateGoal(app: FastifyInstance) {
 
       const goal = await prisma.goal.findUnique({
         where: {
-          id: goalId,
+          id:parseInt(goalId),
           userId: userId,
         },
       });
@@ -55,7 +55,7 @@ export async function updateGoal(app: FastifyInstance) {
 
       const updateGoal = await prisma.goal.update({
         where: {
-          id: goalId,
+          id:parseInt(goalId),
           userId: userId,
         },
         data: {

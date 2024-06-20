@@ -26,7 +26,7 @@ export async function newDebt(app: FastifyInstance) {
           201: z.object({
             message: z.string(),
           }),
-          401: z.object({
+          400: z.object({
             message: z.string(),
           }),
           500: z.object({
@@ -39,6 +39,7 @@ export async function newDebt(app: FastifyInstance) {
       const { userId } = request.params;
       const { description, amount, status, date } = request.body;
 
+    try{
       const debt = await prisma.debt.create({
         data: {
           description,
@@ -48,10 +49,14 @@ export async function newDebt(app: FastifyInstance) {
           userId,
         },
       });
+      if (!description || !amount || !status || !date || !userId) {
+        return reply.status(400).send({ message: "Something invalid" });
+      }
 
-      return reply.status(201).send({ message: "Debt add successfully" });
-      return reply.status(401).send({ message: "Invalid" });
-      return reply.status(500).send({ message: "Internal Server Error" });
-    }
-  );
+    return reply.status(201).send({ message: "Debt add successfully" });
+  } catch {
+    return reply.status(500).send({ message: "Internal Server Error" });
+  }
+}
+);
 }
