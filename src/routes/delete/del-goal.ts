@@ -5,7 +5,7 @@ import { z } from "zod";
 
 export async function delGoal(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().delete(
-    "/:userId/goals/:goal",
+    "/:userId/goals/:goalId",
     {
       schema: {
         summary: "Delete one goal from one user",

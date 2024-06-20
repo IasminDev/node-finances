@@ -5,14 +5,14 @@ import { z } from "zod";
 
 export async function delRevenue(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().delete(
-    "/:userId/revenues/:revenue",
+    "/:userId/revenues/:revenueId",
     {
       schema: {
         summary: "Delete one revenue from one user",
         tags: ["revenues"],
         params: z.object({
           userId: z.string().uuid(),
-          revenueId: z.number().int(),
+          revenueId: z.string(),
         }),
         headers: z.object({
           token: z.string(),
@@ -32,8 +32,8 @@ export async function delRevenue(app: FastifyInstance) {
 
       const saving = await prisma.saving.findUnique({
         where: {
+          id: parseInt(revenueId),
           userId: userId,
-          id: revenueId,
         },
       });
       if (saving === null) {
@@ -41,7 +41,7 @@ export async function delRevenue(app: FastifyInstance) {
       }
       await prisma.saving.delete({
         where: {
-          id: revenueId,
+          id: parseInt(revenueId),
         },
       });
       reply.code(204).send({ message: "Revenue deleted successfully" });

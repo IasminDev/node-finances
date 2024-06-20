@@ -12,7 +12,7 @@ export async function updateRevenue(app: FastifyInstance) {
         tags: ["revenues"],
         params: z.object({
           userId: z.string().uuid(),
-          revenueId: z.number().int(),
+          revenueId: z.string(),
         }),
         headers: z.object({
           token: z.string(),
@@ -47,7 +47,7 @@ export async function updateRevenue(app: FastifyInstance) {
 
       const saving = await prisma.saving.findUnique({
         where: {
-          id: revenueId,
+          id: parseInt(revenueId),
           userId: userId,
         },
       });
@@ -57,7 +57,7 @@ export async function updateRevenue(app: FastifyInstance) {
 
       const updateSaving = await prisma.saving.update({
         where: {
-          id: revenueId,
+          id: parseInt(revenueId),
           userId: userId,
         },
         data: {
