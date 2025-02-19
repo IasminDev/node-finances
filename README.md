@@ -1,6 +1,6 @@
 # Aurea – Finance API  
 
-This repository contains the backend for the **Aurea** personal finance management application. It provides a RESTful API to handle financial transactions, user authentication, and data storage. The frontend for this project is available in the [react-finances](https://github.com/IasminDev/react-finances) repository.  
+This repository contains the backend for the **Aurea** personal finance management application. It provides a RESTful API to handle financial transactions, user authentication, and data storage. The frontend for this project is available in the [aurea_front](https://github.com/IasminDev/aurea_front) repository.  
 
 ## Features  
 
