@@ -21,7 +21,7 @@ This repository contains the backend for the **Aurea** personal finance manageme
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/IasminDev/node-finances.git
+   git clone https://github.com/IasminDev/aurea_back.git
    ```
 2. Navigate to the project directory:  
    ```bash
